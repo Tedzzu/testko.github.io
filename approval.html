@@ -38,3 +38,43 @@
       transition: box-shadow 0.2s;
       background-color: #f9f9f9;
       position: relative;
+    }
+
+    .card:hover {
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 0;
+      border-top: 30px solid #d0d6e1;
+      border-left: 30px solid transparent;
+      border-radius: 0 8px 0 0;
+    }
+
+    .card .label {
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- 좌측 상단: Goo 이미지 -->
+    <div class="logo">
+      <img src="Goo.PNG" alt="메인으로" width="100">
+    </div>
+
+    <!-- 우측 하단: 카드형 기안 버튼 -->
+    <div class="content">
+      <div class="card" onclick="window.open('voucher.html', 'popup', 'width=600,height=400')">
+        <div class="label">점심바우처 사용</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
