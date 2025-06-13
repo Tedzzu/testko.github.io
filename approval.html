@@ -7,6 +7,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
+      font-size: 9pt;
     }
 
     .layout {
@@ -15,28 +16,62 @@
       padding: 20px;
     }
 
-    .logo {
-      flex-shrink: 0;
+    .sidebar {
+      width: 200px;
+    }
+
+    .sidebar img {
+      width: 100px;
+    }
+
+    .menu {
+      margin-top: 20px;
+    }
+
+    .menu button {
+      background-color: #800080;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 9pt;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .menu ul {
+      margin: 10px 0 0 0;
+      padding-left: 16px;
+      list-style-type: none;
+    }
+
+    .menu li {
+      margin: 4px 0;
+    }
+
+    .menu li::before {
+      content: '▣ ';
+      font-size: 8pt;
     }
 
     .content {
-      margin-left: 20px;
+      margin-left: 40px;
       margin-top: 80px;
     }
 
     .card {
-      display: inline-block;
       width: 140px;
       height: 180px;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
       padding-top: 60px;
-      font-size: 16px;
+      font-size: 9pt;
       cursor: pointer;
       transition: box-shadow 0.2s;
       background-color: #f9f9f9;
       position: relative;
+      text-align: center;
     }
 
     .card:hover {
@@ -46,36 +81,41 @@
     .card::before {
       content: "";
       position: absolute;
-      top: 0; right: 0;
-      width: 0; height: 0;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
       border-top: 30px solid #d0d6e1;
       border-left: 30px solid transparent;
       border-radius: 0 8px 0 0;
     }
 
-    .card .label {
+    .label {
       font-weight: bold;
-      text-align: center;
     }
   </style>
 </head>
 <body>
 
   <div class="layout">
-    <!-- 좌측 상단: Goo 이미지 -->
-    <div class="logo">
-     <a href="index.html">
-     <img src="Goo.PNG" alt="로고" width="100">
-     </a>
-    </div>
-
-    <!-- 우측 하단: 카드형 기안 버튼 -->
-    <div class="content">
-      <div class="card" onclick="window.open('voucher.html', 'popup', 'width=600,height=400')">
-        <div class="label">점심바우처 사용</div>
+    <!-- 사이드 메뉴 -->
+    <div class="sidebar">
+      <a href="index.html">
+        <img src="Goo.PNG" alt="메인으로">
+      </a>
+      <div class="menu">
+        <button onclick="location.href='approval_template.html'">결재작성</button>
+        <ul>
+          <li>진행함 0</li>
+          <li>반려함 0</li>
+          <li>임시함 0</li>
+          <li>참조/회람함 0</li>
+          <li>참조/회람 확인함</li>
+          <li>수신함 0</li>
+          <li>완료함</li>
+        </ul>
       </div>
     </div>
-  </div>
 
 </body>
 </html>
