@@ -2,41 +2,55 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Don`t like this at home..</title>
+  <title>나의 홈페이지</title>
   <style>
-    .goo-container {
-      position: relative;
-      width: 160px;
-      height: 160px;
+    body {
+      margin: 0;
+      font-family: sans-serif;
     }
 
-    .goo-container img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 80px;
+    .layout {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
     }
 
-    .goo-container span {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      font-size: 14px;
-      color: #333;
+    .logo {
+      flex-shrink: 0;
+    }
+
+    .content {
+      margin-left: 20px;
+      margin-top: 80px; /* 이미지보다 아래로 내리기 */
+    }
+
+    .content h1 {
+      margin: 0 0 10px;
+    }
+
+    .content p {
+      margin: 0 0 20px;
+    }
+
+    .content button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>환영합니다! 👋</h1>
-  <p>이곳은 전자 결제를 위한 렌딩 페이지입니다.</p>
-  <button onclick="location.href='../approval.html'">전자 결제</button>
-  <br><br>
 
-  <div class="goo-container">
-    <a href="index.html">
-      <img src="Goo.PNG" alt="메인으로">
-      <span>메인으로</span>
-    </a>
+  <div class="layout">
+    <div class="logo">
+      <img src="Goo.PNG" alt="로고" width="100">
+    </div>
+    <div class="content">
+      <h1>환영합니다! 👋</h1>
+      <p>이곳은 전자 결제를 위한 렌딩 페이지입니다.</p>
+      <button onclick="location.href='../approval.html'">전자 결제</button>
+    </div>
   </div>
+
 </body>
 </html>
