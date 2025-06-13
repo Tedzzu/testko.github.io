@@ -3,14 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>나의 홈페이지</title>
+  <style>
+    .goo-container {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+
+    .goo-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px;
+    }
+
+    .goo-container span {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
   <h1>환영합니다! 👋</h1>
   <p>이곳은 전자 결제를 위한 렌딩 페이지입니다.</p>
   <button onclick="location.href='../approval.html'">전자 결제</button>
   <br><br>
-  <a href="index.html">
-    <img src="Goo.PNG" alt="메인으로" width="120">
-  </a>
+
+  <div class="goo-container">
+    <a href="index.html">
+      <img src="Goo.PNG" alt="메인으로">
+      <span>메인으로</span>
+    </a>
+  </div>
 </body>
 </html>
