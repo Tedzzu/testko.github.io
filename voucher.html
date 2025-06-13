@@ -2,14 +2,113 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>점심 바우처</title>
+  <title>점심 바우처 신청</title>
+  <style>
+    body {
+      font-family: '맑은 고딕', sans-serif;
+      margin: 30px;
+      font-size: 9pt;
+    }
+
+    table {
+      width: 670px;
+      border-collapse: collapse;
+      font-size: 9pt;
+    }
+
+    td {
+      border: 1px solid #000;
+      padding: 6px;
+      background-color: #fff;
+    }
+
+    .highlight {
+      background-color: #f0ffff;
+      text-align: center;
+      font-family: 굴림;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 95%;
+      font-family: '맑은 고딕', sans-serif;
+      font-size: 9pt;
+      border: none;
+      outline: none;
+    }
+
+    .preview {
+      border: 1px dashed #888;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .preview p {
+      margin: 4px 0;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h2>점심 바우처 사용 신청</h2>
-  <p>사용 월: 2025.6</p>
-  <p>사용자: 홍길동</p>
-  <p>신규입사자: 임꺽정</p>
-  <p>금액: 60,000원</p>
-  <p>특이사항: 없음</p>
+
+  <!-- 미리보기 영역 -->
+  <div class="preview">
+    <p><span class="label">사용 월:</span> <span id="preview-month"></span></p>
+    <p><span class="label">사용자:</span> <span id="preview-user"></span></p>
+    <p><span class="label">신규입사자:</span> <span id="preview-new"></span></p>
+    <p><span class="label">금액:</span> <span id="preview-amount-total"></span></p>
+    <p><span class="label">특이사항:</span> <span id="preview-extra"></span></p>
+  </div>
+
+  <!-- 입력 영역 -->
+  <form>
+    <table>
+      <tr>
+        <td class="highlight">사용 월</td>
+        <td><input type="text" name="month" oninput="updatePreview()" id="month"></td>
+        <td class="highlight" colspan="2">사용자</td>
+        <td><input type="text" name="user" oninput="updatePreview()" id="user"></td>
+        <td class="highlight">신규입사자</td>
+        <td colspan="2"><input type="text" name="new_member" oninput="updatePreview()" id="new"></td>
+      </tr>
+      <tr>
+        <td class="highlight" colspan="6">내 용</td>
+        <td class="highlight">금 액</td>
+        <td class="highlight">비 고</td>
+      </tr>
+      <tr>
+        <td colspan="6"><input type="text" name="description" value="■ 점심바우처(밀카드) 사용비용"></td>
+        <td><input type="text" name="amount"></td>
+        <td><input type="text" name="note"></td>
+      </tr>
+      <tr>
+        <td class="highlight">금 액</td>
+        <td colspan="7"><input type="text" name="amount_total" oninput="updatePreview()" id="amount_total" placeholder="예: 60,000원 (VAT 포함)"></td>
+      </tr>
+      <tr>
+        <td class="highlight">특이사항</td>
+        <td colspan="7">
+          <textarea name="extra_note" rows="2" oninput="updatePreview()" id="extra_note" placeholder="* 참고사항 파일 다운 받아 작성하여 첨부 必"></textarea>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <!-- 스크립트 -->
+  <script>
+    function updatePreview() {
+      document.getElementById('preview-month').textContent = document.getElementById('month').value;
+      document.getElementById('preview-user').textContent = document.getElementById('user').value;
+      document.getElementById('preview-new').textContent = document.getElementById('new').value;
+      document.getElementById('preview-amount-total').textContent = document.getElementById('amount_total').value;
+      document.getElementById('preview-extra').textContent = document.getElementById('extra_note').value;
+    }
+  </script>
+
 </body>
 </html>
