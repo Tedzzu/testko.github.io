@@ -1,0 +1,29 @@
+# .github/workflows/deploy.yml
+
+name: Auto Deploy Drafts
+
+on:
+  push:
+    paths:
+      - 'pending/**'
+
+jobs:
+  move-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Move pending files to drafts/
+        run: |
+          mkdir -p drafts
+          cp -r pending/* drafts/ || echo "No pending files"
+          rm -rf pending/*
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "action@github.com"
+          git add drafts/
+          git commit -m "Auto: Move drafts from pending" || echo "Nothing to commit"
+          git push
