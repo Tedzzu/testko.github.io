@@ -11,20 +11,32 @@
   </style>
 </head>
 <body>
-  <h2>🗂️ 임시 보관된 바우처 목록</h2>
-  <ul>
-    <li><a href="voucher_2025_4_홍길동.html">voucher_2025_4_홍길동.html</a></li>
-    <li><a href="voucher_2025_6_홍길동.html">voucher_2025_6_홍길동.html</a></li>
-    <li><a href="voucher_2025_7_홍길동.html">voucher_2025_7_홍길동.html</a></li>
-    <li><a href="voucher_2026_1_김지환.html">voucher_2026_1_김지환.html</a></li>
-    <li><a href="voucher_2026_1_홍길동.html">voucher_2026_1_홍길동.html</a></li>
-    <li><a href="voucher_2026_2_김지환.html">voucher_2026_2_김지환.html</a></li>
-    <li><a href="voucher_2026_3_김지환.html">voucher_2026_3_김지환.html</a></li>
-    <li><a href="voucher_2026_5_김지환.html">voucher_2026_5_김지환.html</a></li>
-    <li><a href="voucher_2026_6_주유리.html">voucher_2026_6_주유리.html</a></li>
-    <li><a href="voucher_2026_7_두치.html">voucher_2026_7_두치.html</a></li>
-    <li><a href="voucher_2026_8_홍길동.html">voucher_2026_8_홍길동.html</a></li>
-    <li><a href="voucher_2026_9_이순신.html">voucher_2026_9_이순신.html</a></li>
+  <h2>🗂️ 임시 보관된 바우처 목록 <span id="count" style="color:#888;"></span></h2>
+  <ul id="voucher-list">
+    <li>불러오는 중...</li>
   </ul>
+
+  <script>
+    fetch('voucher_list.json')
+      .then(response => response.json())
+      .then(data => {
+        const listEl = document.getElementById('voucher-list');
+        const countEl = document.getElementById('count');
+        listEl.innerHTML = '';
+        countEl.textContent = `(총 ${data.length}건)`;
+
+        data.forEach(file => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = file;
+          a.textContent = file;
+          li.appendChild(a);
+          listEl.appendChild(li);
+        });
+      })
+      .catch(err => {
+        document.getElementById('voucher-list').innerHTML = '<li>목록을 불러올 수 없습니다.</li>';
+      });
+  </script>
 </body>
 </html>
