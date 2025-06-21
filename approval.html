@@ -54,6 +54,15 @@
       font-size: 8pt;
     }
 
+    .menu li a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .menu li a:hover {
+      text-decoration: underline;
+    }
+
     .content {
       margin-left: 40px;
       margin-top: 80px;
@@ -108,7 +117,7 @@
         <ul>
           <li>진행함 0</li>
           <li>반려함 0</li>
-          <li><a href="drafts/index.html">임시함 <span id="draft-count">0</span></a></li>
+          <li><a href="drafts/index.html">임시함 <span id="draft-count"></span></a></li>
           <li>참조/회람함 0</li>
           <li>참조/회람 확인함</li>
           <li>수신함 0</li>
@@ -116,6 +125,19 @@
         </ul>
       </div>
     </div>
+  </div>
+
+  <script>
+    fetch("drafts/voucher_list.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("draft-count").textContent = data.length;
+      })
+      .catch(err => {
+        console.error("임시함 JSON 불러오기 실패", err);
+        document.getElementById("draft-count").textContent = "0";
+      });
+  </script>
 
 </body>
 </html>
