@@ -140,39 +140,41 @@
       </tbody>
     </table>
   </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const listEl = document.getElementById("voucher-list");
+  const searchInput = document.getElementById("search");
+  let voucherData = [];
 
-  <script>
-    const listEl = document.getElementById("voucher-list");
-    const searchInput = document.getElementById("search");
-    let voucherData = [];
-
-    function renderTable(data) {
-      listEl.innerHTML = "";
-      data.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><input type="checkbox" /></td>
-          <td>${item.category}</td>
-          <td>${item.template}</td>
-          <td><a href="/drafts/${item.filename}" target="_blank">${item.title}</a></td>
-          <td>${item.datetime}</td>
-        `;
-        listEl.appendChild(tr);
-      });
-    }
-
-    fetch("/drafts/voucher_list.json")
-      .then(res => res.json())
-      .then(data => {
-        voucherData = data;
-        renderTable(data);
-      });
-
-    searchInput.addEventListener("input", () => {
-      const keyword = searchInput.value.trim();
-      const filtered = voucherData.filter(v => v.title.includes(keyword));
-      renderTable(filtered);
+  function renderTable(data) {
+    listEl.innerHTML = "";
+    data.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input type="checkbox" /></td>
+        <td>${item.category}</td>
+        <td>${item.template}</td>
+        <td><a href="/drafts/${item.filename}" target="_blank">${item.title}</a></td>
+        <td>${item.datetime}</td>
+      `;
+      listEl.appendChild(tr);
     });
-  </script>
+  }
+
+  fetch("/drafts/voucher_list.json")
+    .then(res => res.json())
+    .then(data => {
+      voucherData = data;
+      renderTable(data);
+    });
+
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.trim();
+    const filtered = voucherData.filter(v => v.title.includes(keyword));
+    renderTable(filtered);
+  });
+});
+</script>
 </body>
 </html>
+
