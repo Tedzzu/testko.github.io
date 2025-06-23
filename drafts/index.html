@@ -2,102 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>임시저장 문서함</title>
   <link rel="stylesheet" href="/style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      background-color: #f4f6f9;
-    }
-
-    /* 좌측 메뉴 */
-    .sidebar {
-      width: 240px;
-      background-color: #2f4050;
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .sidebar h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar ul li {
-      margin-bottom: 12px;
-    }
-
-    .sidebar ul li a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    .sidebar ul li a:hover {
-      color: #fff;
-    }
-
-    /* 우측 콘텐츠 */
-    .main-content {
-      flex: 1;
-      padding: 30px;
-      background-color: #ffffff;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .top-bar h1 {
-      font-size: 20px;
-      margin: 0;
-    }
-
-    .top-bar input[type="text"] {
-      padding: 6px 12px;
-      font-size: 14px;
-      width: 250px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-    }
-
-    thead {
-      background-color: #f0f2f5;
-    }
-
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-      font-size: 14px;
-    }
-
-    th {
-      color: #333;
-    }
-
-    tr:hover {
-      background-color: #f9f9f9;
-    }
-  </style>
 </head>
 <body>
-
   <div class="sidebar">
     <h2>전자결재</h2>
     <ul>
@@ -111,7 +19,7 @@
   <div class="main-content">
     <div class="top-bar">
       <h1>임시저장 문서함</h1>
-      <input type="text" id="search" placeholder="문서명 검색">
+      <input type="text" id="search" placeholder="제목 검색">
     </div>
 
     <table>
@@ -125,53 +33,44 @@
         </tr>
       </thead>
       <tbody id="voucher-list">
-        <!-- JavaScript로 데이터 삽입 -->
+        <!-- JavaScript로 렌더링 -->
       </tbody>
     </table>
   </div>
 
   <script>
-    // 예시 JSON 목록 (기존 렌더링 방식에 맞춰 사용)
-    const vouchers = [
-      {
-        category: "점심바우처",
-        template: "바우처",
-        title: "2025년 6월 홍길동 바우처",
-        datetime: "2025-06-20 10:12"
-      },
-      {
-        category: "점심바우처",
-        template: "바우처",
-        title: "2025년 6월 임꺽정 바우처",
-        datetime: "2025-06-21 11:03"
-      }
-    ];
-
-    const list = document.getElementById("voucher-list");
+    const listEl = document.getElementById("voucher-list");
     const searchInput = document.getElementById("search");
 
-    function renderList(data) {
-      list.innerHTML = "";
-      data.forEach((v) => {
+    let voucherData = [];
+
+    function renderTable(data) {
+      listEl.innerHTML = "";
+      data.forEach(item => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td><input type="checkbox" /></td>
-          <td>${v.category}</td>
-          <td>${v.template}</td>
-          <td>${v.title}</td>
-          <td>${v.datetime}</td>
+          <td>${item.category}</td>
+          <td>${item.template}</td>
+          <td><a href="/drafts/${item.filename}" target="_blank">${item.title}</a></td>
+          <td>${item.datetime}</td>
         `;
-        list.appendChild(tr);
+        listEl.appendChild(tr);
       });
     }
 
+    fetch("/drafts/voucher_list.json")
+      .then(res => res.json())
+      .then(data => {
+        voucherData = data;
+        renderTable(data);
+      });
+
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim();
-      const filtered = vouchers.filter(v => v.title.includes(keyword));
-      renderList(filtered);
+      const filtered = voucherData.filter(v => v.title.includes(keyword));
+      renderTable(filtered);
     });
-
-    renderList(vouchers);
   </script>
 </body>
 </html>
