@@ -72,9 +72,8 @@
       gap: 30px;
     }
 
-    .sidebar {
-      width: 220px;
-    }
+    
+  border-right: 1px solid #ddd;
 
     .menu {
       margin-top: 10px;
@@ -162,6 +161,9 @@
       <div class="menu">
         <button onclick="location.href='approval_template.html'">결재작성</button>
         <ul>
+          <li><span style="color:#800080; font-weight:bold;">▾ 개인함</span></li>
+          <li>예고함 0</li>
+          <li>미결함 0</li>
           <li>진행함 0</li>
           <li>반려함 0</li>
           <li><a href="drafts/index.html">임시함 <span id="draft-count"></span></a></li>
