@@ -1,42 +1,177 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>임시 보관된 바우처 목록</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>임시저장 문서함</title>
+  <link rel="stylesheet" href="/style.css" />
   <style>
-    body { font-family: '맑은 고딕', sans-serif; margin: 40px; }
-    h2 { color: #333; }
-    ul { padding-left: 20px; }
-    li { margin: 8px 0; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      background-color: #f4f6f9;
+    }
+
+    /* 좌측 메뉴 */
+    .sidebar {
+      width: 240px;
+      background-color: #2f4050;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 12px;
+    }
+
+    .sidebar ul li a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .sidebar ul li a:hover {
+      color: #fff;
+    }
+
+    /* 우측 콘텐츠 */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      background-color: #ffffff;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .top-bar h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .top-bar input[type="text"] {
+      padding: 6px 12px;
+      font-size: 14px;
+      width: 250px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+    }
+
+    thead {
+      background-color: #f0f2f5;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    th {
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
   </style>
 </head>
 <body>
-  <h2>🗂️ 임시 보관된 바우처 목록 <span id="count" style="color:#888;"></span></h2>
-  <ul id="voucher-list">
-    <li>불러오는 중...</li>
-  </ul>
+
+  <div class="sidebar">
+    <h2>전자결재</h2>
+    <ul>
+      <li><a href="/approval.html">결재함</a></li>
+      <li><a href="/drafts/index.html" style="color: #fff;">임시저장</a></li>
+      <li><a href="#">보관함</a></li>
+      <li><a href="#">문서작성</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="top-bar">
+      <h1>임시저장 문서함</h1>
+      <input type="text" id="search" placeholder="문서명 검색">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+          <th>구분</th>
+          <th>양식명</th>
+          <th>제목</th>
+          <th>일시</th>
+        </tr>
+      </thead>
+      <tbody id="voucher-list">
+        <!-- JavaScript로 데이터 삽입 -->
+      </tbody>
+    </table>
+  </div>
 
   <script>
-    fetch('voucher_list.json')
-      .then(response => response.json())
-      .then(data => {
-        const listEl = document.getElementById('voucher-list');
-        const countEl = document.getElementById('count');
-        listEl.innerHTML = '';
-        countEl.textContent = `(총 ${data.length}건)`;
+    // 예시 JSON 목록 (기존 렌더링 방식에 맞춰 사용)
+    const vouchers = [
+      {
+        category: "점심바우처",
+        template: "바우처",
+        title: "2025년 6월 홍길동 바우처",
+        datetime: "2025-06-20 10:12"
+      },
+      {
+        category: "점심바우처",
+        template: "바우처",
+        title: "2025년 6월 임꺽정 바우처",
+        datetime: "2025-06-21 11:03"
+      }
+    ];
 
-        data.forEach(file => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = file;
-          a.textContent = file;
-          li.appendChild(a);
-          listEl.appendChild(li);
-        });
-      })
-      .catch(err => {
-        document.getElementById('voucher-list').innerHTML = '<li>목록을 불러올 수 없습니다.</li>';
+    const list = document.getElementById("voucher-list");
+    const searchInput = document.getElementById("search");
+
+    function renderList(data) {
+      list.innerHTML = "";
+      data.forEach((v) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input type="checkbox" /></td>
+          <td>${v.category}</td>
+          <td>${v.template}</td>
+          <td>${v.title}</td>
+          <td>${v.datetime}</td>
+        `;
+        list.appendChild(tr);
       });
+    }
+
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim();
+      const filtered = vouchers.filter(v => v.title.includes(keyword));
+      renderList(filtered);
+    });
+
+    renderList(vouchers);
   </script>
 </body>
 </html>
