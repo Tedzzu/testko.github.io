@@ -5,5 +5,12 @@
     "title": "2026년 1 홍길동 바우처",
     "datetime": "2025-06-23 15:58",
     "filename": "voucher_2026_1_홍길동.html"
+  },
+  {
+    "category": "점심바우처",
+    "template": "바우처",
+    "title": "2026년 2월 이순신 바우처",
+    "datetime": "2025-06-23 16:02",
+    "filename": "voucher_2026_2_이순신.html"
   }
 ]
