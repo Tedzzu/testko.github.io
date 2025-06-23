@@ -47,5 +47,12 @@
     "title": "2026년 12 강감찬 바우처",
     "datetime": "2025-06-23 06:26",
     "filename": "voucher_2026_12_강감찬.html"
+  },
+  {
+    "category": "점심바우처",
+    "template": "바우처",
+    "title": "2027년 1 홍길동 바우처",
+    "datetime": "2025-06-23 15:38",
+    "filename": "voucher_2027_1_홍길동.html"
   }
 ]
