@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  fetch("/drafts/voucher_list.json")
+  fetch("voucher_list.json")
     .then(res => res.json())
     .then(data => {
       voucherData = data;
