@@ -10,58 +10,57 @@
       font-size: 9pt;
     }
 
-    .topbar {
+    .top-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: white;
-      padding: 0 20px;
       height: 60px;
+      padding: 0 20px;
       border-bottom: 1px solid #ddd;
     }
 
-    .topbar-left {
+    .top-header .left {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
-    .topbar-left img {
+    .top-header .left img {
       height: 32px;
     }
 
-    .topbar-center {
-      flex-grow: 1;
-      background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
-      color: white;
-      font-size: 13px;
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      white-space: nowrap;
-      overflow-x: auto;
-    }
-
-    .topbar-center span {
-      cursor: pointer;
-    }
-
-    .topbar-right {
+    .top-header .right {
       display: flex;
       align-items: center;
       gap: 14px;
     }
 
-    .topbar-right img {
+    .top-header .right img {
       height: 24px;
+    }
+
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
+      color: white;
+      font-size: 13px;
+      padding: 8px 20px;
+      gap: 16px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .menu-bar span {
+      cursor: pointer;
     }
 
     .layout {
       display: flex;
       align-items: flex-start;
       padding: 20px;
-      margin-top: 60px;
+      margin-top: 0;
     }
 
     .sidebar {
@@ -110,36 +109,38 @@
 </head>
 <body>
 
-  <!-- KG 스타일 상단바 -->
-  <div class="topbar">
-    <div class="topbar-left">
+  <!-- KG 상단 헤더 영역 -->
+  <div class="top-header">
+    <div class="left">
       <div class="menu-icon">☰</div>
       <a href="index.html">
         <img src="Goo.PNG" alt="KG 로고">
       </a>
     </div>
-    <div class="topbar-center">
-      <span>메일</span> |
-      <span>지식ini</span> |
-      <span>전자결재</span> |
-      <span>경비결재</span> |
-      <span>게시판</span> |
-      <span>일정관리</span> |
-      <span>자원예약</span> |
-      <span>웹폴더</span> |
-      <span>업무도구</span> |
-      <span>커뮤니티</span> |
-      <span>사규</span> |
-      <span><strong>KG Store</strong></span> |
-      <span><strong>KG Family Mall</strong></span>
-    </div>
-    <div class="topbar-right">
+    <div class="right">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/QR_code_icon.svg/512px-QR_code_icon.svg.png" alt="QR">
       <img src="https://static.thenounproject.com/png/3381447-200.png" alt="홈">
       <img src="https://static.thenounproject.com/png/2302394-200.png" alt="조직도">
       <img src="https://static.thenounproject.com/png/2523095-200.png" alt="연필">
       <img src="https://static.thenounproject.com/png/4077864-200.png" alt="유저">
     </div>
+  </div>
+
+  <!-- KG 하단 메뉴바 -->
+  <div class="menu-bar">
+    <span>메일</span> |
+    <span>지식ini</span> |
+    <span>전자결재</span> |
+    <span>경비결재</span> |
+    <span>게시판</span> |
+    <span>일정관리</span> |
+    <span>자원예약</span> |
+    <span>웹폴더</span> |
+    <span>업무도구</span> |
+    <span>커뮤니티</span> |
+    <span>사규</span> |
+    <span><strong>KG Store</strong></span> |
+    <span><strong>KG Family Mall</strong></span>
   </div>
 
   <div class="layout">
