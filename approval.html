@@ -11,17 +11,12 @@
     }
 
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: white;
-      height: 60px;
       padding: 0 20px;
+      height: 60px;
       border-bottom: 1px solid #ddd;
     }
 
@@ -32,21 +27,20 @@
     }
 
     .topbar-left img {
-      height: 30px;
+      height: 32px;
     }
 
     .topbar-center {
       flex-grow: 1;
       background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
       color: white;
-      font-size: 14px;
-      padding: 6px 20px;
+      font-size: 13px;
+      padding: 8px 20px;
       display: flex;
       align-items: center;
       gap: 16px;
-      margin: 0 16px;
-      overflow-x: auto;
       white-space: nowrap;
+      overflow-x: auto;
     }
 
     .topbar-center span {
@@ -56,7 +50,7 @@
     .topbar-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .topbar-right img {
@@ -66,7 +60,8 @@
     .layout {
       display: flex;
       align-items: flex-start;
-      padding: 100px 20px 20px;
+      padding: 20px;
+      margin-top: 60px;
     }
 
     .sidebar {
@@ -115,63 +110,37 @@
     .menu li a:hover {
       text-decoration: underline;
     }
-
-    .content {
-      margin-left: 40px;
-      margin-top: 80px;
-    }
-
-    .card {
-      width: 140px;
-      height: 180px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-      padding-top: 60px;
-      font-size: 9pt;
-      cursor: pointer;
-      transition: box-shadow 0.2s;
-      background-color: #f9f9f9;
-      position: relative;
-      text-align: center;
-    }
-
-    .card:hover {
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-top: 30px solid #d0d6e1;
-      border-left: 30px solid transparent;
-      border-radius: 0 8px 0 0;
-    }
-
-    .label {
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
 
+  <!-- KG 스타일 상단바 -->
   <div class="topbar">
     <div class="topbar-left">
       <div class="menu-icon">☰</div>
       <img src="https://kgfamilymall.com/assets/img/logo_kg.png" alt="KG 로고">
     </div>
     <div class="topbar-center">
-      <span>메일</span> | <span>전자결재</span> | <span>경비결재</span> | <span>커뮤니티</span> | <span>KG Store</span>
+      <span>메일</span> |
+      <span>지식ini</span> |
+      <span>전자결재</span> |
+      <span>경비결재</span> |
+      <span>게시판</span> |
+      <span>일정관리</span> |
+      <span>자원예약</span> |
+      <span>웹폴더</span> |
+      <span>업무도구</span> |
+      <span>커뮤니티</span> |
+      <span>사규</span> |
+      <span><strong>KG Store</strong></span> |
+      <span><strong>KG Family Mall</strong></span>
     </div>
     <div class="topbar-right">
-      <img src="https://static.thenounproject.com/png/2196920-200.png" alt="QR">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/QR_code_icon.svg/512px-QR_code_icon.svg.png" alt="QR">
       <img src="https://static.thenounproject.com/png/3381447-200.png" alt="홈">
       <img src="https://static.thenounproject.com/png/2302394-200.png" alt="조직도">
       <img src="https://static.thenounproject.com/png/2523095-200.png" alt="연필">
+      <img src="https://static.thenounproject.com/png/4077864-200.png" alt="유저">
     </div>
   </div>
 
