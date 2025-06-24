@@ -75,5 +75,12 @@
     "title": "2025-08월 홍길동 바우처",
     "datetime": "2025-06-24 17:13",
     "filename": "voucher_2025-08_홍길동.html"
+  },
+  {
+    "category": "점심바우처",
+    "template": "바우처",
+    "title": "2025-09월 홍길동 바우처",
+    "datetime": "2025-06-24 17:32",
+    "filename": "voucher_2025-09_홍길동.html"
   }
 ]
