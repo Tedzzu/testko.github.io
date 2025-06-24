@@ -2,56 +2,344 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Don`t try this at home...!</title>
+  <title>전자결재</title>
   <style>
     body {
       margin: 0;
       font-family: sans-serif;
+      font-size: 9pt;
+      background-color: #fff;
+    }
+
+    .top-header {
+      display: flex;
+      align-items: center;
+      background: white;
+      height: 60px;
+      padding: 0 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .top-header .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-header .left img {
+      height: 28px;
+    }
+
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
+      color: white;
+      font-size: 13px;
+      padding: 6px 20px;
+      gap: 14px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .menu-bar span {
+      cursor: pointer;
+    }
+
+    .title-line {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 18px 20px 8px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
     }
 
     .layout {
       display: flex;
-      align-items: flex-start;
-      padding: 20px;
+      height: calc(100vh - 120px);
     }
 
-    .logo {
-      flex-shrink: 0;
+    .sidebar {
+      width: 180px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-right: 1px solid #ddd;
+    }
+
+    .menu button {
+      background-color: #800080;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      font-size: 10pt;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .menu ul {
+      margin: 14px 0 0 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+
+    .menu li {
+      margin: 6px 0;
+      font-size: 9pt;
+    }
+
+    .menu li::before {
+      content: '▣ ';
+      font-size: 8pt;
+    }
+
+    .menu li a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .menu li a:hover {
+      text-decoration: underline;
     }
 
     .content {
-      margin-left: 20px;
-      margin-top: 80px; /* 이미지보다 아래로 내리기 */
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #ffffff;
     }
 
-    .content h1 {
-      margin: 0 0 10px;
+    .page-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
 
-    .content p {
-      margin: 0 0 20px;
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .content button {
-      padding: 10px 16px;
-      font-size: 16px;
+    .toolbar select, .toolbar button {
+      height: 30px;
+      padding: 0 12px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: white;
       cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background-color: #f7f7f7;
+      border-top: 2px solid #8c4bbb;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #e1e1e1;
+      font-size: 13px;
+    }
+
+    th {
+      font-weight: bold;
+      color: #444;
+    }
+
+    tr:hover {
+      background-color: #fafafa;
+    }
+
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .pagination button {
+      border: 1px solid #ccc;
+      background-color: #fff;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      border-color: #800080;
+      color: #800080;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <div class="layout">
-    <div class="logo">
-     <a href="index/"><img src="Goo.PNG" alt="메인으로" width="100"></a>
-    </div>
-    <div class="content">
-      <h1>안녕 테쯔얌! 👋</h1>
-      <p>주유링링링링링기리딩딩딩.</p>
-      <p>바보똥개.</p>
-      <button onclick="location.href='../approval.html'">전자 결제</button>
+<!-- 상단 헤더 -->
+<div class="top-header">
+  <div class="left">
+    <div class="menu-icon">☰</div>
+    <a href="../approval.html">
+      <img src="../Goo.PNG" alt="KG 로고" />
+    </a>
+  </div>
+</div>
+
+<!-- 상단 메뉴 -->
+<div class="menu-bar">
+  <span>메일</span> |
+  <span>지식ini</span> |
+  <span>전자결재</span> |
+  <span>경비결재</span> |
+  <span>게시판</span> |
+  <span>일정관리</span> |
+  <span>자원예약</span> |
+  <span>웹폴더</span> |
+  <span>업무도구</span> |
+  <span>커뮤니티</span> |
+  <span>사규</span> |
+  <span><strong>KG Store</strong></span> |
+  <span><strong>KG Family Mall</strong></span>
+</div>
+
+<!-- 타이틀 -->
+<div class="title-line">전자결재</div>
+
+<div class="layout">
+  <!-- 좌측 메뉴 -->
+  <div class="sidebar">
+    <div class="menu">
+      <button onclick="location.href='../approval_template.html'">결재작성</button>
+      <ul>
+        <li>예고함 0</li>
+        <li>미결함 0</li>
+        <li>진행함 0</li>
+        <li>반려함 0</li>
+        <li><a href="../drafts/index.html">임시함 <span id="draft-count"></span></a></li>
+        <li>참조/회람함 0</li>
+        <li>참조/회람 확인함</li>
+        <li>수신함 0</li>
+        <li>완료함</li>
+      </ul>
     </div>
   </div>
+
+  <!-- 본문 -->
+  <div class="content">
+    <div class="page-title">임시함</div>
+
+    <div class="toolbar">
+      <select>
+        <option>전체</option>
+        <option>임시</option>
+      </select>
+      <button>삭제</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+          <th>구분</th>
+          <th>양식명</th>
+          <th>제목</th>
+          <th>일시</th>
+        </tr>
+      </thead>
+      <tbody id="voucher-list">
+        <!-- JS 렌더링 -->
+      </tbody>
+    </table>
+
+    <div class="pagination" id="pagination">
+      <!-- 페이지네이션 -->
+    </div>
+  </div>
+</div>
+
+<script>
+fetch("../drafts/voucher_list.json")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("draft-count").textContent = data.length;
+  })
+  .catch(err => {
+    console.error("임시함 JSON 불러오기 실패", err);
+    document.getElementById("draft-count").textContent = "0";
+  });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const listEl = document.getElementById("voucher-list");
+  const paginationEl = document.getElementById("pagination");
+  const itemsPerPage = 10;
+  let currentPage = 1;
+  let voucherData = [];
+
+  function renderTable(page = 1) {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const currentItems = voucherData.slice(start, end);
+
+    listEl.innerHTML = "";
+    currentItems.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input type="checkbox" /></td>
+        <td>${item.category}</td>
+        <td>${item.template}</td>
+        <td><a href="../drafts/${item.filename}" target="_blank">${item.title}</a></td>
+        <td>${item.datetime}</td>
+      `;
+      listEl.appendChild(tr);
+    });
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(voucherData.length / itemsPerPage);
+    paginationEl.innerHTML = "";
+
+    const makeButton = (label, page, isActive = false) => {
+      const btn = document.createElement("button");
+      btn.textContent = label;
+      if (isActive) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        currentPage = page;
+        renderTable(currentPage);
+        renderPagination();
+      });
+      return btn;
+    };
+
+    paginationEl.appendChild(makeButton("≪", 1));
+    paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
+
+    for (let i = 1; i <= totalPages; i++) {
+      paginationEl.appendChild(makeButton(i, i, i === currentPage));
+    }
+
+    paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
+    paginationEl.appendChild(makeButton("≫", totalPages));
+  }
+
+  fetch("../drafts/voucher_list.json")
+    .then(res => res.json())
+    .then(data => {
+      voucherData = data;
+      renderTable(currentPage);
+      renderPagination();
+    })
+    .catch(err => {
+      console.error("바우처 목록 로딩 실패", err);
+    });
+});
+</script>
 
 </body>
 </html>
