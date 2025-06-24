@@ -222,7 +222,7 @@
           <li>미결함 0</li>
           <li>진행함 0</li>
           <li>반려함 0</li>
-          <li><a href="/drafts/index.html" style="color: #800080; font-weight: bold;">임시함</a></li>
+          <li><a href="drafts/index.html">임시함 <span id="draft-count"></span></a></li>
           <li>참조/회람함 0</li>
           <li>참조/회람 확인함</li>
           <li>수신함 0</li>
@@ -265,67 +265,82 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const listEl = document.getElementById("voucher-list");
-      const paginationEl = document.getElementById("pagination");
-      const itemsPerPage = 10;
-      let currentPage = 1;
-      let voucherData = [];
+  // 좌측 메뉴 카운트
+  fetch("voucher_list.json")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("draft-count").textContent = data.length;
+    })
+    .catch(err => {
+      console.error("임시함 JSON 불러오기 실패", err);
+      document.getElementById("draft-count").textContent = "0";
+    });
 
-      function renderTable(page = 1) {
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const currentItems = voucherData.slice(start, end);
+  document.addEventListener("DOMContentLoaded", function () {
+    const listEl = document.getElementById("voucher-list");
+    const paginationEl = document.getElementById("pagination");
+    const itemsPerPage = 10;
+    let currentPage = 1;
+    let voucherData = [];
 
-        listEl.innerHTML = "";
-        currentItems.forEach(item => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td><input type="checkbox" /></td>
-            <td>${item.category}</td>
-            <td>${item.template}</td>
-            <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
-            <td>${item.datetime}</td>
-          `;
-          listEl.appendChild(tr);
-        });
-      }
+    function renderTable(page = 1) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentItems = voucherData.slice(start, end);
 
-      function renderPagination() {
-        const totalPages = Math.ceil(voucherData.length / itemsPerPage);
-        paginationEl.innerHTML = "";
+      listEl.innerHTML = "";
+      currentItems.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input type="checkbox" /></td>
+          <td>${item.category}</td>
+          <td>${item.template}</td>
+          <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
+          <td>${item.datetime}</td>
+        `;
+        listEl.appendChild(tr);
+      });
+    }
 
-        const makeButton = (label, page, isActive = false) => {
-          const btn = document.createElement("button");
-          btn.textContent = label;
-          if (isActive) btn.classList.add("active");
-          btn.addEventListener("click", () => {
-            currentPage = page;
-            renderTable(currentPage);
-            renderPagination();
-          });
-          return btn;
-        };
+    function renderPagination() {
+      const totalPages = Math.ceil(voucherData.length / itemsPerPage);
+      paginationEl.innerHTML = "";
 
-        paginationEl.appendChild(makeButton("≪", 1));
-        paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
-
-        for (let i = 1; i <= totalPages; i++) {
-          paginationEl.appendChild(makeButton(i, i, i === currentPage));
-        }
-
-        paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
-        paginationEl.appendChild(makeButton("≫", totalPages));
-      }
-
-      fetch("/testko.github.io/drafts/voucher_list.json")  // ✅ 절대경로로 수정
-        .then(res => res.json())
-        .then(data => {
-          voucherData = data;
+      const makeButton = (label, page, isActive = false) => {
+        const btn = document.createElement("button");
+        btn.textContent = label;
+        if (isActive) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentPage = page;
           renderTable(currentPage);
           renderPagination();
         });
-    });
-  </script>
+        return btn;
+      };
+
+      paginationEl.appendChild(makeButton("≪", 1));
+      paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
+
+      for (let i = 1; i <= totalPages; i++) {
+        paginationEl.appendChild(makeButton(i, i, i === currentPage));
+      }
+
+      paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
+      paginationEl.appendChild(makeButton("≫", totalPages));
+    }
+
+    // ✅ 하단 목록도 fetch 필요 (이게 빠져 있었음)
+    fetch("voucher_list.json")
+      .then(res => res.json())
+      .then(data => {
+        voucherData = data;
+        renderTable(currentPage);
+        renderPagination();
+      })
+      .catch(err => {
+        console.error("바우처 목록 로딩 실패", err);
+      });
+  });
+</script>
 </body>
 </html>
