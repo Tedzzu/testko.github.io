@@ -2,179 +2,330 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>임시저장 문서함</title>
-  <link rel="stylesheet" href="/style.css" />
+  <title>임시함</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: sans-serif;
+      font-size: 9pt;
+      background-color: #fff;
+    }
+
+    .top-header {
       display: flex;
-      background-color: #f4f6f9;
+      align-items: center;
+      background: white;
+      height: 60px;
+      padding: 0 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .top-header .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-header .left img {
+      height: 28px;
+    }
+
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
+      color: white;
+      font-size: 13px;
+      padding: 6px 20px;
+      gap: 14px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .menu-bar span {
+      cursor: pointer;
+    }
+
+    .title-line {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 18px 20px 8px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
+    }
+
+    .layout {
+      display: flex;
+      height: calc(100vh - 120px);
     }
 
     .sidebar {
-      width: 240px;
-      background-color: #2f4050;
-      color: white;
-      min-height: 100vh;
+      width: 180px;
       padding: 20px;
-      box-sizing: border-box;
+      background-color: #f9f9f9;
+      border-right: 1px solid #ddd;
     }
 
-    .sidebar h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #fff;
+    .menu button {
+      background-color: #800080;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      font-size: 10pt;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
     }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .menu ul {
+      margin: 14px 0 0 0;
+      padding-left: 0;
+      list-style-type: none;
     }
 
-    .sidebar ul li {
-      margin-bottom: 12px;
+    .menu li {
+      margin: 6px 0;
+      font-size: 9pt;
     }
 
-    .sidebar ul li a {
-      color: #ccc;
+    .menu li::before {
+      content: '▣ ';
+      font-size: 8pt;
+    }
+
+    .menu li a {
+      color: black;
       text-decoration: none;
     }
 
-    .sidebar ul li a:hover {
-      color: #fff;
+    .menu li a:hover {
+      text-decoration: underline;
     }
 
-    .main-content {
-      flex: 1;
+    .content {
+      flex-grow: 1;
       padding: 30px;
       background-color: #ffffff;
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .page-title {
+      font-size: 18px;
+      font-weight: bold;
       margin-bottom: 20px;
     }
 
-    .top-bar h1 {
-      font-size: 20px;
-      margin: 0;
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .top-bar input[type="text"] {
-      padding: 6px 12px;
-      font-size: 14px;
-      width: 250px;
+    .toolbar select, .toolbar button {
+      height: 30px;
+      padding: 0 12px;
+      font-size: 13px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      background-color: white;
+      cursor: pointer;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: white;
     }
 
     thead {
-      background-color: #f0f2f5;
+      background-color: #f7f7f7;
+      border-top: 2px solid #8c4bbb;
+      border-bottom: 1px solid #ddd;
     }
 
     th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-      font-size: 14px;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #e1e1e1;
+      font-size: 13px;
     }
 
     th {
-      font-weight: 600;
-      color: #333;
+      font-weight: bold;
+      color: #444;
     }
 
     tr:hover {
-      background-color: #f9f9f9;
+      background-color: #fafafa;
     }
 
-    a {
-      color: #0074cc;
-      text-decoration: none;
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .pagination button {
+      border: 1px solid #ccc;
+      background-color: #fff;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      border-color: #800080;
+      color: #800080;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>전자결재</h2>
-    <ul>
-      <li><a href="/approval.html">결재함</a></li>
-      <li><a href="/drafts/index.html" style="color: #fff;">임시저장</a></li>
-      <li><a href="#">보관함</a></li>
-      <li><a href="#">문서작성</a></li>
-    </ul>
+
+  <!-- KG 상단 헤더 -->
+  <div class="top-header">
+    <div class="left">
+      <div class="menu-icon">☰</div>
+      <a href="/index.html">
+        <img src="Goo.PNG" alt="KG 로고">
+      </a>
+    </div>
   </div>
 
-  <div class="main-content">
-    <div class="top-bar">
-      <h1>임시저장 문서함</h1>
-      <input type="text" id="search" placeholder="제목 검색">
+  <!-- 상단 메뉴바 -->
+  <div class="menu-bar">
+    <span>메일</span> |
+    <span>지식ini</span> |
+    <span>전자결재</span> |
+    <span>경비결재</span> |
+    <span>게시판</span> |
+    <span>일정관리</span> |
+    <span>자원예약</span> |
+    <span>웹폴더</span> |
+    <span>업무도구</span> |
+    <span>커뮤니티</span> |
+    <span>사규</span> |
+    <span><strong>KG Store</strong></span> |
+    <span><strong>KG Family Mall</strong></span>
+  </div>
+
+  <!-- 타이틀 -->
+  <div class="title-line">전자결재</div>
+
+  <div class="layout">
+    <!-- 좌측 사이드바 -->
+    <div class="sidebar">
+      <div class="menu">
+        <button onclick="location.href='/approval_template.html'">결재작성</button>
+        <ul>
+          <li>예고함 0</li>
+          <li>미결함 0</li>
+          <li>진행함 0</li>
+          <li>반려함 0</li>
+          <li><a href="/drafts/index.html" style="color: #800080; font-weight: bold;">임시함</a></li>
+          <li>참조/회람함 0</li>
+          <li>참조/회람 확인함</li>
+          <li>수신함 0</li>
+          <li>완료함</li>
+        </ul>
+      </div>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th><input type="checkbox" /></th>
-          <th>구분</th>
-          <th>양식명</th>
-          <th>제목</th>
-          <th>일시</th>
-        </tr>
-      </thead>
-      <tbody id="voucher-list">
-        <!-- JS로 자동 렌더링 -->
-      </tbody>
-    </table>
+    <!-- 본문 영역 -->
+    <div class="content">
+      <div class="page-title">임시함</div>
+
+      <div class="toolbar">
+        <select>
+          <option>전체</option>
+          <option>임시</option>
+        </select>
+        <button>삭제</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" /></th>
+            <th>구분</th>
+            <th>양식명</th>
+            <th>제목</th>
+            <th>일시</th>
+          </tr>
+        </thead>
+        <tbody id="voucher-list">
+          <!-- JS에서 렌더링 -->
+        </tbody>
+      </table>
+
+      <div class="pagination" id="pagination">
+        <!-- 페이지 버튼 -->
+      </div>
+    </div>
   </div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const listEl = document.getElementById("voucher-list");
-  const searchInput = document.getElementById("search");
-  let voucherData = [];
 
-  function renderTable(data) {
-    listEl.innerHTML = "";
-    data.forEach(item => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td><input type="checkbox" /></td>
-        <td>${item.category}</td>
-        <td>${item.template}</td>
-        <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
-        <td>${item.datetime}</td>
-      `;
-      listEl.appendChild(tr);
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const listEl = document.getElementById("voucher-list");
+      const paginationEl = document.getElementById("pagination");
+      const itemsPerPage = 10;
+      let currentPage = 1;
+      let voucherData = [];
+
+      function renderTable(page = 1) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const currentItems = voucherData.slice(start, end);
+
+        listEl.innerHTML = "";
+        currentItems.forEach(item => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><input type="checkbox" /></td>
+            <td>${item.category}</td>
+            <td>${item.template}</td>
+            <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
+            <td>${item.datetime}</td>
+          `;
+          listEl.appendChild(tr);
+        });
+      }
+
+      function renderPagination() {
+        const totalPages = Math.ceil(voucherData.length / itemsPerPage);
+        paginationEl.innerHTML = "";
+
+        const makeButton = (label, page, isActive = false) => {
+          const btn = document.createElement("button");
+          btn.textContent = label;
+          if (isActive) btn.classList.add("active");
+          btn.addEventListener("click", () => {
+            currentPage = page;
+            renderTable(currentPage);
+            renderPagination();
+          });
+          return btn;
+        };
+
+        paginationEl.appendChild(makeButton("≪", 1));
+        paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
+
+        for (let i = 1; i <= totalPages; i++) {
+          paginationEl.appendChild(makeButton(i, i, i === currentPage));
+        }
+
+        paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
+        paginationEl.appendChild(makeButton("≫", totalPages));
+      }
+
+      fetch("/drafts/voucher_list.json")
+        .then(res => res.json())
+        .then(data => {
+          voucherData = data;
+          renderTable(currentPage);
+          renderPagination();
+        });
     });
-  }
-
-  fetch("voucher_list.json")
-    .then(res => res.json())
-    .then(data => {
-      voucherData = data;
-      renderTable(data);
-    });
-
-  searchInput.addEventListener("input", () => {
-    const keyword = searchInput.value.trim();
-    const filtered = voucherData.filter(v => v.title.includes(keyword));
-    renderTable(filtered);
-  });
-});
-</script>
+  </script>
 </body>
 </html>
-
