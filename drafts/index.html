@@ -318,7 +318,7 @@
         paginationEl.appendChild(makeButton("≫", totalPages));
       }
 
-      fetch("/drafts/voucher_list.json")
+      fetch("/testko.github.io/drafts/voucher_list.json")  // ✅ 절대경로로 수정
         .then(res => res.json())
         .then(data => {
           voucherData = data;
