@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>전자결재 템플릿</title>
+  <meta charset="UTF-8" />
+  <title>전자결재</title>
   <style>
     body {
       margin: 0;
@@ -56,7 +56,7 @@
 
     .layout {
       display: flex;
-      padding: 30px;
+      height: calc(100vh - 120px);
     }
 
     .sidebar {
@@ -105,20 +105,19 @@
 
     .content {
       flex-grow: 1;
-      padding: 20px 40px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
+      padding: 40px;
+      background-color: #ffffff;
     }
 
     .card {
-      width: 100px;
-      height: 140px;
+      display: inline-block;
+      width: 90px;
+      height: 130px;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
       padding-top: 40px;
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
       transition: box-shadow 0.2s;
       background-color: #f9f9f9;
@@ -152,7 +151,7 @@
     <div class="left">
       <div class="menu-icon">☰</div>
       <a href="index.html">
-        <img src="./Goo.png" alt="KG 로고" />
+        <img src="Goo.PNG" alt="KG 로고" />
       </a>
     </div>
   </div>
@@ -187,7 +186,7 @@
           <li>미결함 0</li>
           <li>진행함 0</li>
           <li>반려함 0</li>
-          <li><a href="/drafts/index.html">임시함</a></li>
+          <li><a href="/drafts/index.html" style="color: #800080; font-weight: bold;">임시함</a></li>
           <li>참조/회람함 0</li>
           <li>참조/회람 확인함</li>
           <li>수신함 0</li>
@@ -196,10 +195,10 @@
       </div>
     </div>
 
-    <!-- 카드 템플릿 -->
+    <!-- 본문 영역 -->
     <div class="content">
       <div class="card" onclick="window.open('voucher.html', 'popup', 'width=600,height=400')">
-        <div class="label">점심바우처 사용</div>
+        <div class="label">점심바우처<br>사용</div>
       </div>
     </div>
   </div>
