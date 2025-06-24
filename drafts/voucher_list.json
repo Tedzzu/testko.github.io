@@ -40,5 +40,12 @@
     "title": "2026년 6월 홍길동 바우처",
     "datetime": "2025-06-24 15:32",
     "filename": "voucher_2026_6_홍길동.html"
+  },
+  {
+    "category": "점심바우처",
+    "template": "바우처",
+    "title": "2026년 7월 홍길동 바우처",
+    "datetime": "2025-06-24 15:37",
+    "filename": "voucher_2026_7_홍길동.html"
   }
 ]
