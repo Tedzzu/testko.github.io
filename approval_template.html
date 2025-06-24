@@ -2,41 +2,128 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>전자 결제</title>
+  <title>전자결재 템플릿</title>
   <style>
     body {
       margin: 0;
       font-family: sans-serif;
+      font-size: 9pt;
+      background-color: #fff;
+    }
+
+    .top-header {
+      display: flex;
+      align-items: center;
+      background: white;
+      height: 60px;
+      padding: 0 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .top-header .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-header .left img {
+      height: 28px;
+    }
+
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, #3e0078, #ff2cb1, #ff6b00);
+      color: white;
+      font-size: 13px;
+      padding: 6px 20px;
+      gap: 14px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .menu-bar span {
+      cursor: pointer;
+    }
+
+    .title-line {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 18px 20px 8px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
     }
 
     .layout {
       display: flex;
-      align-items: flex-start;
-      padding: 20px;
+      padding: 30px;
     }
 
-    .logo {
-      flex-shrink: 0;
+    .sidebar {
+      width: 180px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-right: 1px solid #ddd;
+    }
+
+    .menu button {
+      background-color: #800080;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      font-size: 10pt;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .menu ul {
+      margin: 14px 0 0 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+
+    .menu li {
+      margin: 6px 0;
+      font-size: 9pt;
+    }
+
+    .menu li::before {
+      content: '▣ ';
+      font-size: 8pt;
+    }
+
+    .menu li a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .menu li a:hover {
+      text-decoration: underline;
     }
 
     .content {
-      margin-left: 20px;
-      margin-top: 80px;
+      flex-grow: 1;
+      padding: 20px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
     }
 
     .card {
-      display: inline-block;
-      width: 140px;
-      height: 180px;
+      width: 100px;
+      height: 140px;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-      padding-top: 60px;
-      font-size: 16px;
+      padding-top: 40px;
+      font-size: 14px;
       cursor: pointer;
       transition: box-shadow 0.2s;
       background-color: #f9f9f9;
       position: relative;
+      text-align: center;
     }
 
     .card:hover {
@@ -55,21 +142,61 @@
 
     .card .label {
       font-weight: bold;
-      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <!-- KG 상단 헤더 -->
+  <div class="top-header">
+    <div class="left">
+      <div class="menu-icon">☰</div>
+      <a href="index.html">
+        <img src="./Goo.png" alt="KG 로고" />
+      </a>
+    </div>
+  </div>
+
+  <!-- 상단 메뉴바 -->
+  <div class="menu-bar">
+    <span>메일</span> |
+    <span>지식ini</span> |
+    <span>전자결재</span> |
+    <span>경비결재</span> |
+    <span>게시판</span> |
+    <span>일정관리</span> |
+    <span>자원예약</span> |
+    <span>웹폴더</span> |
+    <span>업무도구</span> |
+    <span>커뮤니티</span> |
+    <span>사규</span> |
+    <span><strong>KG Store</strong></span> |
+    <span><strong>KG Family Mall</strong></span>
+  </div>
+
+  <!-- 타이틀 -->
+  <div class="title-line">전자결재</div>
+
   <div class="layout">
-    <!-- 좌측 상단: Goo 이미지 -->
-    <div class="logo">
-     <a href="index.html">
-     <img src="Goo.PNG" alt="로고" width="100">
-     </a>
+    <!-- 좌측 사이드바 -->
+    <div class="sidebar">
+      <div class="menu">
+        <button onclick="location.href='https://tedzzu.github.io/testko.github.io/approval_template.html'">결재작성</button>
+        <ul>
+          <li>예고함 0</li>
+          <li>미결함 0</li>
+          <li>진행함 0</li>
+          <li>반려함 0</li>
+          <li><a href="/drafts/index.html">임시함</a></li>
+          <li>참조/회람함 0</li>
+          <li>참조/회람 확인함</li>
+          <li>수신함 0</li>
+          <li>완료함</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- 우측 하단: 카드형 기안 버튼 -->
+    <!-- 카드 템플릿 -->
     <div class="content">
       <div class="card" onclick="window.open('voucher.html', 'popup', 'width=600,height=400')">
         <div class="label">점심바우처 사용</div>
