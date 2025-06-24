@@ -203,5 +203,17 @@
     </div>
   </div>
 
+  <script>
+    fetch("drafts/voucher_list.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("draft-count").textContent = data.length;
+      })
+      .catch(err => {
+        console.error("임시함 JSON 불러오기 실패", err);
+        document.getElementById("draft-count").textContent = "0";
+      });
+  </script>
+
 </body>
 </html>
