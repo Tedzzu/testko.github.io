@@ -44,18 +44,18 @@
       font-family: '굴림';
     }
 
-.signArea {
-  padding: 30px 0;
-  text-align: center;
-  font-style: italic;
-}
-    
+    .signArea {
+      padding: 30px 0;
+      text-align: center;
+      font-style: italic;
+    }
+
     .emptySign {
-  height: 20px !important;
-  padding: 0 !important;
-  font-size: 9px;
-  line-height: 1;
-}
+      height: 20px !important;
+      padding: 0 !important;
+      font-size: 9px;
+      line-height: 1;
+    }
 
     input, select, textarea {
       width: 95%;
@@ -65,9 +65,59 @@
       outline: none;
       background: none;
     }
+
+    .wordTop {
+      margin-bottom: 10px;
+    }
+
+    .AXButton, .blBtn {
+      padding: 5px 10px;
+      font-size: 9pt;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    
+    .action-buttons {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.action-buttons button {
+  padding: 5px 15px;
+  font-size: 9pt;
+  font-family: '맑은 고딕';
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background-color: #e6f6ff;
+  border-color: #00a0dc;
+}
   </style>
+
+  <script>
+    function doButtonAction(btn) {
+      alert("버튼 클릭됨: " + btn.value);
+    }
+
+    function DocLink() {
+      alert("문서 연결 기능 실행");
+    }
+  </script>
 </head>
 <body>
+
+<!-- 좌측 최상단 버튼 영역 -->
+<!-- 버튼 영역 -->
+<div class="action-buttons">
+  <button type="button">기안</button>
+  <button type="button">문서연결</button>
+  <button type="button">미리보기</button>
+</div>
 
 <div class="header">점심바우처 사용</div>
 
@@ -88,15 +138,13 @@
       <td class="signArea">김지환</td>
       <td class="signArea">이재재</td>
     </tr>
-<tr>
-  <td class="signArea emptySign">&nbsp;</td>
-  <td class="signArea emptySign">&nbsp;</td>
-</tr>
-<tr>
-  <td class="signArea emptySign">&nbsp;</td>
-  <td class="signArea emptySign">&nbsp;</td>
-</tr>
-
+    <tr>
+      <td class="signArea emptySign">&nbsp;</td>
+      <td class="signArea emptySign">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="signArea emptySign">&nbsp;</td>
+      <td class="signArea emptySign">&nbsp;</td>
     </tr>
   </tbody>
 </table>
