@@ -4,93 +4,195 @@
   <meta charset="UTF-8">
   <title>점심 바우처 신청</title>
   <style>
-    body { font-family: '맑은 고딕'; margin: 30px; font-size: 9pt; }
-    table { width: 670px; border-collapse: collapse; font-size: 9pt; }
-    td, th { border: 1px solid #000; padding: 6px; background: #fff; }
-    .highlight { background-color: #f0ffff; text-align: center; font-weight: bold; font-family: 굴림; }
-    input, textarea { width: 95%; border: none; font-family: '맑은 고딕'; font-size: 9pt; }
-    .preview-btn { margin-top: 20px; padding: 6px 12px; }
+    body {
+      font-family: '맑은 고딕', sans-serif;
+      margin: 30px;
+      font-size: 9pt;
+      background-color: #f6f8f8;
+    }
+
+    .header {
+      font-size: 16pt;
+      font-weight: bold;
+      margin: 0 0 50px 300px;
+    }
+
+    .sign-table {
+      border-collapse: collapse;
+      font-size: 9pt;
+      background-color: #fff;
+      margin: 0 0 0px 430px;
+    }
+
+    .info-table {
+      width: 670px;
+      border-collapse: collapse;
+      font-size: 9pt;
+      background-color: #fff;
+      margin-top: 20px;
+    }
+
+    td, th {
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+
+    .highlight {
+      background-color: #ecf8f8;
+      text-align: center;
+      font-weight: bold;
+      font-family: '굴림';
+    }
+
+.signArea {
+  padding: 30px 0;
+  text-align: center;
+  font-style: italic;
+}
+    
+    .emptySign {
+  height: 20px !important;
+  padding: 0 !important;
+  font-size: 9px;
+  line-height: 1;
+}
+
+    input, select, textarea {
+      width: 95%;
+      font-family: '맑은 고딕';
+      font-size: 9pt;
+      border: none;
+      outline: none;
+      background: none;
+    }
   </style>
 </head>
 <body>
 
-<h2 style="text-align:center;">점심바우처 사용</h2>
+<div class="header">점심바우처 사용</div>
 
+<!-- 결재 테이블 -->
+<table class="sign-table">
+  <colgroup>
+    <col style="width: 40px">
+    <col style="width: 100px">
+    <col style="width: 100px">
+  </colgroup>
+  <tbody>
+    <tr>
+      <th class="highlight" rowspan="4">결재</th>
+      <td class="highlight">기안</td>
+      <td class="highlight">매니저</td>
+    </tr>
+    <tr>
+      <td class="signArea">김지환</td>
+      <td class="signArea">이재재</td>
+    </tr>
+<tr>
+  <td class="signArea emptySign">&nbsp;</td>
+  <td class="signArea emptySign">&nbsp;</td>
+</tr>
+<tr>
+  <td class="signArea emptySign">&nbsp;</td>
+  <td class="signArea emptySign">&nbsp;</td>
+</tr>
+
+    </tr>
+  </tbody>
+</table>
+
+<!-- 정보 테이블 -->
+<table class="info-table">
+  <colgroup>
+    <col style="width: 80px">
+    <col style="width: 160px">
+    <col style="width: 80px">
+    <col style="width: 160px">
+    <col style="width: 80px">
+    <col style="width: 110px">
+  </colgroup>
+  <tbody>
+    <tr>
+      <th class="highlight">작성자</th>
+      <td><input type="text" value="김지환" readonly></td>
+      <th class="highlight">작성부서</th>
+      <td><input type="text" value="인프라기술" readonly></td>
+      <th class="highlight">문서번호</th>
+      <td><input type="text" value="" readonly></td>
+    </tr>
+    <tr>
+      <th class="highlight">공개여부</th>
+      <td>
+        <select>
+          <option value="2">부서 공개</option>
+          <option value="1">전사 공개</option>
+          <option value="3">비공개</option>
+        </select>
+      </td>
+      <th class="highlight">보안등급</th>
+      <td>
+        <select>
+          <option value="100">일반문서</option>
+          <option value="200">보안문서</option>
+        </select>
+      </td>
+      <th class="highlight">보존년한</th>
+      <td>
+        <select>
+          <option value="1">1년</option>
+          <option value="3">3년</option>
+          <option value="5">5년</option>
+          <option value="10">10년</option>
+          <option value="99">영구</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 바우처 입력 폼 -->
 <form id="voucherForm">
-  <table>
-    <tr>
-      <td class="highlight">사용 월</td>
-      <td><input id="month"></td>
-      <td class="highlight" colspan="2">사용자</td>
-      <td><input id="user"></td>
-      <td class="highlight">신규입사자</td>
-      <td colspan="2"><input id="new_member"></td>
-    </tr>
-    <tr>
-      <td class="highlight" colspan="6">내 용</td>
-      <td class="highlight">금 액</td>
-      <td class="highlight">비 고</td>
-    </tr>
-    <tr>
-      <td colspan="6"><input id="description" value="■ 점심바우처(밀카드) 사용비용"></td>
-      <td><input id="amount"></td>
-      <td><input id="note"></td>
-    </tr>
-    <tr>
-      <td class="highlight">금 액</td>
-      <td colspan="7"><input id="amount_total" placeholder="예: 60,000원 (VAT 포함)"></td>
-    </tr>
-    <tr>
-      <td class="highlight">특이사항</td>
-      <td colspan="7"><textarea id="extra_note" rows="2"></textarea></td>
-    </tr>
+  <table class="info-table">
+    <colgroup>
+      <col style="width: 80px">
+      <col style="width: 160px">
+      <col style="width: 80px">
+      <col style="width: 160px">
+      <col style="width: 80px">
+      <col style="width: 110px">
+    </colgroup>
+    <tbody>
+      <tr>
+        <th class="highlight">사용 월</th>
+        <td><input type="text" name="month" placeholder="예: 2025.6"></td>
+        <th class="highlight">사용자</th>
+        <td><input type="text" name="user" placeholder="예: 김지환"></td>
+        <th class="highlight">신규입사자</th>
+        <td><input type="text" name="new_member" placeholder="예: 홍길동 외 0명"></td>
+      </tr>
+      <tr>
+        <th class="highlight" colspan="4">내 용</th>
+        <th class="highlight">금 액</th>
+        <th class="highlight">비 고</th>
+      </tr>
+      <tr>
+        <td colspan="4"><input type="text" name="description" value="■ 점심바우처(밀카드) 사용비용"></td>
+        <td><input type="text" name="amount" placeholder="예: 60,000"></td>
+        <td><input type="text" name="note"></td>
+      </tr>
+      <tr>
+        <th class="highlight">총금액</th>
+        <td colspan="5"><input type="text" name="amount_total" placeholder="예: 60,000원 (VAT 포함)"></td>
+      </tr>
+      <tr>
+        <th class="highlight">특이사항</th>
+        <td colspan="5">
+          <textarea name="extra_note" rows="2" placeholder="* 참고사항 파일 다운 받아 작성하여 첨부 必"></textarea>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </form>
-
-<button class="preview-btn" onclick="openPreview()">미리보기</button>
-
-<script>
-function openPreview() {
-  const v = id => document.getElementById(id).value;
-  const popup = window.open('', '', 'width=800,height=700');
-  popup.document.write(`
-    <html><head><meta charset="UTF-8">
-    <style>
-      body { font-family: '맑은 고딕'; font-size: 9pt; margin: 30px; }
-      table { width: 670px; border-collapse: collapse; }
-      td, th { border: 1px solid #000; padding: 6px; background: #fff; }
-      .highlight { background: #f0ffff; text-align: center; font-weight: bold; font-family: 굴림; }
-    </style></head><body>
-    <h2 style="text-align:center;">점심바우처 사용</h2>
-
-    <table style="float:right; width:180px; margin-bottom:10px;">
-      <tr><th>기안</th><th>매니저</th></tr>
-      <tr><td><b>김지환</b></td><td><b>이재재</b></td></tr>
-    </table>
-
-    <table>
-      <tr><td>작성자</td><td>김지환</td><td>작성부서</td><td>회계팀</td><td>문서번호</td><td>1</td></tr>
-      <tr><td>공개여부</td><td>부서 공개</td><td>보안등급</td><td>일반문서</td><td>보존년한</td><td>1년</td></tr>
-      <tr><td>참조</td><td colspan="5">회계팀 전원</td></tr>
-      <tr><td>제목</td><td colspan="5"></td></tr>
-    </table>
-
-    <table>
-      <tr>
-        <td class="highlight">사용 월</td><td>${v("month")}</td>
-        <td class="highlight" colspan="2">사용자</td><td>${v("user")}</td>
-        <td class="highlight">신규입사자</td><td colspan="2">${v("new_member")}</td>
-      </tr>
-      <tr><td class="highlight" colspan="6">내 용</td><td class="highlight">금 액</td><td class="highlight">비 고</td></tr>
-      <tr><td colspan="6">${v("description")}</td><td>${v("amount")}</td><td>${v("note")}</td></tr>
-      <tr><td class="highlight">금 액</td><td colspan="7">${v("amount_total")}</td></tr>
-      <tr><td class="highlight">특이사항</td><td colspan="7">${v("extra_note").replace(/\n/g, '<br>')}</td></tr>
-    </table>
-    </body></html>
-  `);
-  popup.document.close();
-}
-</script>
 
 </body>
 </html>
