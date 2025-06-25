@@ -1,126 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>점심 바우처 신청</title>
+  <style>
+    body { font-family: '맑은 고딕'; margin: 30px; font-size: 9pt; }
+    table { width: 670px; border-collapse: collapse; font-size: 9pt; }
+    td, th { border: 1px solid #000; padding: 6px; background: #fff; }
+    .highlight { background-color: #f0ffff; text-align: center; font-weight: bold; font-family: 굴림; }
+    input, textarea { width: 95%; border: none; font-family: '맑은 고딕'; font-size: 9pt; }
+    .preview-btn { margin-top: 20px; padding: 6px 12px; }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">점심바우처 사용</h2>
+
+<form id="voucherForm">
+  <table>
+    <tr>
+      <td class="highlight">사용 월</td>
+      <td><input id="month"></td>
+      <td class="highlight" colspan="2">사용자</td>
+      <td><input id="user"></td>
+      <td class="highlight">신규입사자</td>
+      <td colspan="2"><input id="new_member"></td>
+    </tr>
+    <tr>
+      <td class="highlight" colspan="6">내 용</td>
+      <td class="highlight">금 액</td>
+      <td class="highlight">비 고</td>
+    </tr>
+    <tr>
+      <td colspan="6"><input id="description" value="■ 점심바우처(밀카드) 사용비용"></td>
+      <td><input id="amount"></td>
+      <td><input id="note"></td>
+    </tr>
+    <tr>
+      <td class="highlight">금 액</td>
+      <td colspan="7"><input id="amount_total" placeholder="예: 60,000원 (VAT 포함)"></td>
+    </tr>
+    <tr>
+      <td class="highlight">특이사항</td>
+      <td colspan="7"><textarea id="extra_note" rows="2"></textarea></td>
+    </tr>
+  </table>
+</form>
+
+<button class="preview-btn" onclick="openPreview()">미리보기</button>
+
 <script>
-  function openPreview() {
-    const values = {
-      month: document.getElementById("month").value,
-      user: document.getElementById("user").value,
-      new_member: document.getElementById("new_member").value,
-      description: document.getElementById("description").value,
-      amount: document.getElementById("amount").value,
-      note: document.getElementById("note").value,
-      amount_total: document.getElementById("amount_total").value,
-      extra_note: document.getElementById("extra_note").value
-    };
+function openPreview() {
+  const v = id => document.getElementById(id).value;
+  const popup = window.open('', '', 'width=800,height=700');
+  popup.document.write(`
+    <html><head><meta charset="UTF-8">
+    <style>
+      body { font-family: '맑은 고딕'; font-size: 9pt; margin: 30px; }
+      table { width: 670px; border-collapse: collapse; }
+      td, th { border: 1px solid #000; padding: 6px; background: #fff; }
+      .highlight { background: #f0ffff; text-align: center; font-weight: bold; font-family: 굴림; }
+    </style></head><body>
+    <h2 style="text-align:center;">점심바우처 사용</h2>
 
-    const popup = window.open('', '미리보기', 'width=800,height=600');
-    popup.document.write(`
-      <html>
-      <head>
-        <title>미리보기</title>
-        <style>
-          body {
-            font-family: '맑은 고딕', sans-serif;
-            font-size: 9pt;
-            margin: 30px;
-          }
-          h2 {
-            text-align: center;
-            margin-bottom: 30px;
-          }
-          table {
-            width: 670px;
-            border-collapse: collapse;
-            font-size: 9pt;
-            margin-bottom: 15px;
-          }
-          td, th {
-            border: 1px solid #000;
-            padding: 6px;
-            background-color: #fff;
-            vertical-align: top;
-          }
-          .highlight {
-            background-color: #f0ffff;
-            text-align: center;
-            font-weight: bold;
-            font-family: 굴림;
-          }
-          .approval-box {
-            float: right;
-            width: 180px;
-            border-collapse: collapse;
-            margin-bottom: 10px;
-          }
-          .approval-box td, .approval-box th {
-            border: 1px solid #000;
-            text-align: center;
-            padding: 6px;
-            background-color: #fff;
-          }
-        </style>
-      </head>
-      <body>
-        <h2>점심바우처 사용</h2>
+    <table style="float:right; width:180px; margin-bottom:10px;">
+      <tr><th>기안</th><th>매니저</th></tr>
+      <tr><td><b>김지환</b></td><td><b>이재재</b></td></tr>
+    </table>
 
-        <!-- 결재 박스 -->
-        <table class="approval-box">
-          <tr><th>기안</th><th>매니저</th></tr>
-          <tr><td><b>김지환</b></td><td><b>이재재</b></td></tr>
-        </table>
+    <table>
+      <tr><td>작성자</td><td>김지환</td><td>작성부서</td><td>회계팀</td><td>문서번호</td><td>1</td></tr>
+      <tr><td>공개여부</td><td>부서 공개</td><td>보안등급</td><td>일반문서</td><td>보존년한</td><td>1년</td></tr>
+      <tr><td>참조</td><td colspan="5">회계팀 전원</td></tr>
+      <tr><td>제목</td><td colspan="5"></td></tr>
+    </table>
 
-        <!-- 상단 작성 정보 -->
-        <table>
-          <tr>
-            <td>작성자</td><td>김지환</td>
-            <td>작성부서</td><td>회계팀</td>
-            <td>문서번호</td><td>1</td>
-          </tr>
-          <tr>
-            <td>공개여부</td><td>부서 공개</td>
-            <td>보안등급</td><td>일반문서</td>
-            <td>보존년한</td><td>1년</td>
-          </tr>
-          <tr>
-            <td>참조</td>
-            <td colspan="5">회계팀 매니저 김희선; 회계팀 매니저 이장환; 회계팀 매니저 여대훈; 회계팀 매니저 김미선; 회계팀 매니저 정민근; 회계팀 매니저 서지수; 회계팀 매니저 김종우; 회계팀 매니저 박진안; 회계팀 Lead 홍승호; 총무 매니저 최대환</td>
-          </tr>
-          <tr>
-            <td>제목</td>
-            <td colspan="5"></td>
-          </tr>
-        </table>
-
-        <!-- 하단 점심바우처 신청 테이블 -->
-        <table>
-          <tr>
-            <td class="highlight">사용 월</td>
-            <td>${values.month}</td>
-            <td class="highlight" colspan="2">사용자</td>
-            <td>${values.user}</td>
-            <td class="highlight">신규입사자</td>
-            <td colspan="2">${values.new_member}</td>
-          </tr>
-          <tr>
-            <td class="highlight" colspan="6">내 용</td>
-            <td class="highlight">금 액</td>
-            <td class="highlight">비 고</td>
-          </tr>
-          <tr>
-            <td colspan="6">${values.description}</td>
-            <td>${values.amount}</td>
-            <td>${values.note}</td>
-          </tr>
-          <tr>
-            <td class="highlight">금 액</td>
-            <td colspan="7">${values.amount_total}</td>
-          </tr>
-          <tr>
-            <td class="highlight">특이사항</td>
-            <td colspan="7">${values.extra_note.replace(/\n/g, '<br>')}</td>
-          </tr>
-        </table>
-      </body>
-      </html>
-    `);
-    popup.document.close();
-  }
+    <table>
+      <tr>
+        <td class="highlight">사용 월</td><td>${v("month")}</td>
+        <td class="highlight" colspan="2">사용자</td><td>${v("user")}</td>
+        <td class="highlight">신규입사자</td><td colspan="2">${v("new_member")}</td>
+      </tr>
+      <tr><td class="highlight" colspan="6">내 용</td><td class="highlight">금 액</td><td class="highlight">비 고</td></tr>
+      <tr><td colspan="6">${v("description")}</td><td>${v("amount")}</td><td>${v("note")}</td></tr>
+      <tr><td class="highlight">금 액</td><td colspan="7">${v("amount_total")}</td></tr>
+      <tr><td class="highlight">특이사항</td><td colspan="7">${v("extra_note").replace(/\n/g, '<br>')}</td></tr>
+    </table>
+    </body></html>
+  `);
+  popup.document.close();
+}
 </script>
+
+</body>
+</html>
