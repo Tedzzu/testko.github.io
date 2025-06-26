@@ -29,8 +29,17 @@
       border-collapse: collapse;
       font-size: 9pt;
       background-color: #fff;
-      margin-top: 20px;
+      margin-top: 10px;
     }
+	
+	.look-table {
+      width: 670px;
+      border-collapse: collapse;
+      font-size: 9pt;
+      background-color: #fff;
+      margin-top: 10px;
+    }
+
 
     td, th {
       border: 1px solid #ccc;
@@ -136,7 +145,7 @@
     </tr>
     <tr>
       <td class="signArea">김지환</td>
-      <td class="signArea">이재재</td>
+      <td class="signArea">이제재</td>
     </tr>
     <tr>
       <td class="signArea emptySign">&nbsp;</td>
@@ -194,6 +203,20 @@
           <option value="99">영구</option>
         </select>
       </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 참조 테이블 -->
+<table class="look-table">
+  <colgroup>
+    <col style="width: 10px">
+    <col style="width: 180px">
+  </colgroup>
+  <tbody>
+    <tr>
+      <th class="highlight">참조</th>
+      <td><input type="text" value="회계팀, 총무팀" readonly></td>
     </tr>
   </tbody>
 </table>
