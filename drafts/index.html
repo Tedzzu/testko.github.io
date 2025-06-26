@@ -186,8 +186,8 @@
 <div class="top-header">
   <div class="left">
     <div class="menu-icon">☰</div>
-    <a href="index.html">
-      <img src="./Goo.png" alt="KG 로고" />
+ <a href="../approval.html">
+  <img src="./Goo.png" alt="KG 로고" />
     </a>
   </div>
 </div>
@@ -319,13 +319,14 @@ function renderTable(page = 1) {
       paginationEl.appendChild(makeButton("≫", totalPages));
     }
 
-    fetch("/testko.github.io/drafts/voucher_list.json")
-      .then(res => res.json())
-      .then(data => {
-        voucherData = data;
-        renderTable(currentPage);
-        renderPagination();
-      });
+fetch("https://tedzzu.github.io/testko.github.io/drafts/voucher_list.json")
+  .then(res => res.json())
+  .then(data => {
+    voucherData = data;
+    renderTable(currentPage);
+    renderPagination();
+    document.getElementById("draft-count").textContent = `(${voucherData.length})`;  // ✅ 카운트 표시
+  });
   });
 </script>
 </body>
