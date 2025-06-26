@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: '맑은 고딕', sans-serif;
       font-size: 9pt;
       background-color: #fff;
     }
@@ -47,9 +47,9 @@
     }
 
     .title-line {
-      font-size: 18px;
+      font-size: 25px;
       font-weight: bold;
-      padding: 18px 20px 8px;
+      padding: 5px 20px 8px;
       border-bottom: 1px solid #ccc;
       background: #fff;
     }
@@ -105,42 +105,89 @@
 
     .content {
       flex-grow: 1;
-      padding: 40px;
+      padding: 10px;
       background-color: #ffffff;
     }
 
+    /* 탭 스타일 */
+    .writeTab {
+      display: flex;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .writeTab li {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-bottom: none;
+    }
+
+    .writeTab li.active {
+      background-color: white;
+      border-bottom: 2px solid white;
+      font-weight: bold;
+    }
+
+    /* 카드 스타일 개선 */
     .card {
       display: inline-block;
-      width: 90px;
+      width: 85px;
       height: 130px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-      padding-top: 40px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: box-shadow 0.2s;
+      border: 1px solid #ccc;
+      border-radius: 6px;
       background-color: #f9f9f9;
-      position: relative;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
+      font-size: 10pt;
+      padding: 12px;
+      position: relative;
+      margin: 0 10px 20px 0;
+      transition: 0.2s ease-in-out;
     }
 
     .card:hover {
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 30px 10px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
 
     .card::before {
-      content: "";
+      content: '';
       position: absolute;
-      top: 0; right: 0;
+      top: 0;
+      right: 0;
       width: 0; height: 0;
-      border-top: 30px solid #d0d6e1;
-      border-left: 30px solid transparent;
-      border-radius: 0 8px 0 0;
+      border-top: 40px solid #2f9ed5;
+      border-left: 40px solid transparent;
+      border-top-right-radius: 6px;
+    }
+
+    .card::after {
+      content: '★';
+      position: absolute;
+      top: 2px;
+      right: 6px;
+      font-size: 10pt;
+      color: white;
     }
 
     .card .label {
+      margin-top: 45px;
       font-weight: bold;
+      line-height: 1.4;
+    }
+
+    .card .help-icon {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      font-size: 6pt;
+      color: #bbb;
     }
   </style>
 </head>
@@ -195,25 +242,57 @@
       </div>
     </div>
 
-    <!-- 본문 영역 -->
+    <!-- 본문 -->
     <div class="content">
-      <div class="card" onclick="window.open('voucher.html', 'popup', 'width=900,height=850,resizable=no,scrollbars=yes')">
-       <div class="label">점심바우처<br>사용</div>
+
+      <!-- 탭 메뉴 -->
+      <ul class="writeTab" id="writeTab">
+        <li class="active" onclick="showForm('voucher', this)">이니시스_기본</li>
+        <li onclick="showForm('security', this)">정보보호_서식</li>
+      </ul>
+
+      <!-- 양식 카드: 이니시스_기본 -->
+      <div id="form-voucher">
+        <div class="card" onclick="window.open('voucher.html', 'popup', 'width=900,height=850')">
+          <div class="label">점심바우처<br>사용</div>
+          <div class="help-icon">?</div>
+        </div>
       </div>
+
+      <!-- 양식 카드: 정보보호_서식 -->
+      <div id="form-security" style="display: none;">
+        <div class="card" onclick="window.open('firewall.html', 'popup', 'width=900,height=850')">
+          <div class="label">방화벽 정책<br>등록/삭제 요청서</div>
+          <div class="help-icon">?</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
+    function showForm(form, el) {
+      document.getElementById('form-voucher').style.display = (form === 'voucher') ? 'block' : 'none';
+      document.getElementById('form-security').style.display = (form === 'security') ? 'block' : 'none';
+
+      // 탭 active 클래스 관리
+      const tabs = document.querySelectorAll('.writeTab li');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      if (el) el.classList.add('active');
+    }
+
+    // 초기 탭 설정
+    showForm('voucher');
+
+    // 임시함 개수 표시
     fetch("drafts/voucher_list.json")
       .then(res => res.json())
       .then(data => {
         document.getElementById("draft-count").textContent = data.length;
       })
-      .catch(err => {
-        console.error("임시함 JSON 불러오기 실패", err);
+      .catch(() => {
         document.getElementById("draft-count").textContent = "0";
       });
   </script>
-
 </body>
 </html>
