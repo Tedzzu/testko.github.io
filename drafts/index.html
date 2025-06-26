@@ -265,67 +265,67 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const listEl = document.getElementById("voucher-list");
-      const paginationEl = document.getElementById("pagination");
-      const itemsPerPage = 10;
-      let currentPage = 1;
-      let voucherData = [];
+  document.addEventListener("DOMContentLoaded", function () {
+    const listEl = document.getElementById("voucher-list");
+    const paginationEl = document.getElementById("pagination");
+    const itemsPerPage = 10;
+    let currentPage = 1;
+    let voucherData = [];
 
-      function renderTable(page = 1) {
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const currentItems = voucherData.slice(start, end);
+    function renderTable(page = 1) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentItems = voucherData.slice(start, end);
 
-        listEl.innerHTML = "";
-        currentItems.forEach(item => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = 
-            <td><input type="checkbox" /></td>
-            <td>${item.category}</td>
-            <td>${item.template}</td>
-            <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
-            <td>${item.datetime}</td>
-          ;
-          listEl.appendChild(tr);
-        });
-      }
+      listEl.innerHTML = "";
+      currentItems.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input type="checkbox" /></td>
+          <td>${item.category}</td>
+          <td>${item.template}</td>
+          <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
+          <td>${item.datetime}</td>
+        `;
+        listEl.appendChild(tr);
+      });
+    }
 
-      function renderPagination() {
-        const totalPages = Math.ceil(voucherData.length / itemsPerPage);
-        paginationEl.innerHTML = "";
+    function renderPagination() {
+      const totalPages = Math.ceil(voucherData.length / itemsPerPage);
+      paginationEl.innerHTML = "";
 
-        const makeButton = (label, page, isActive = false) => {
-          const btn = document.createElement("button");
-          btn.textContent = label;
-          if (isActive) btn.classList.add("active");
-          btn.addEventListener("click", () => {
-            currentPage = page;
-            renderTable(currentPage);
-            renderPagination();
-          });
-          return btn;
-        };
-
-        paginationEl.appendChild(makeButton("≪", 1));
-        paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
-
-        for (let i = 1; i <= totalPages; i++) {
-          paginationEl.appendChild(makeButton(i, i, i === currentPage));
-        }
-
-        paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
-        paginationEl.appendChild(makeButton("≫", totalPages));
-      }
-
-      fetch("/testko.github.io/drafts/voucher_list.json")  // ✅ 절대경로로 수정
-        .then(res => res.json())
-        .then(data => {
-          voucherData = data;
+      const makeButton = (label, page, isActive = false) => {
+        const btn = document.createElement("button");
+        btn.textContent = label;
+        if (isActive) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentPage = page;
           renderTable(currentPage);
           renderPagination();
         });
-    });
-  </script>
+        return btn;
+      };
+
+      paginationEl.appendChild(makeButton("≪", 1));
+      paginationEl.appendChild(makeButton("〈", Math.max(currentPage - 1, 1)));
+
+      for (let i = 1; i <= totalPages; i++) {
+        paginationEl.appendChild(makeButton(i, i, i === currentPage));
+      }
+
+      paginationEl.appendChild(makeButton("〉", Math.min(currentPage + 1, totalPages)));
+      paginationEl.appendChild(makeButton("≫", totalPages));
+    }
+
+    fetch("/testko.github.io/drafts/voucher_list.json")
+      .then(res => res.json())
+      .then(data => {
+        voucherData = data;
+        renderTable(currentPage);
+        renderPagination();
+      });
+  });
+</script>
 </body>
 </html>
