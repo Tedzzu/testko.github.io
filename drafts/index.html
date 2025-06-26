@@ -319,7 +319,7 @@ function renderTable(page = 1) {
       paginationEl.appendChild(makeButton("≫", totalPages));
     }
 
-fetch("https://tedzzu.github.io/testko.github.io/drafts/voucher_list.json")
+fetch("voucher_list.json")
   .then(res => res.json())
   .then(data => {
     voucherData = data;
