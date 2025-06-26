@@ -182,21 +182,21 @@
 </head>
 <body>
 
-  <!-- KG 상단 헤더 -->
-  <div class="top-header">
-    <div class="left">
-      <div class="menu-icon">☰</div>
-      <a href="/index.html">
-        <img src="Goo.PNG" alt="KG 로고">
-      </a>
-    </div>
+<!-- KG 상단 헤더 -->
+<div class="top-header">
+  <div class="left">
+    <div class="menu-icon">☰</div>
+    <a href="index.html">
+      <img src="./Goo.png" alt="KG 로고" />
+    </a>
   </div>
+</div>
 
   <!-- 상단 메뉴바 -->
   <div class="menu-bar">
     <span>메일</span> |
     <span>지식ini</span> |
-    <span>전자결재</span>
+    <span>전자결재</span> |
     <span>경비결재</span> |
     <span>게시판</span> |
     <span>일정관리</span> |
@@ -214,10 +214,10 @@
 
   <div class="layout">
     <!-- 좌측 사이드바 -->
-    <div class="sidebar">
-      <div class="menu">
-        <button onclick="location.href='/approval_template.html'">결재작성</button>
-        <ul>
+<div class="sidebar">
+  <div class="menu">
+    <button onclick="location.href='https://tedzzu.github.io/testko.github.io/approval_template.html'">결재작성</button>
+    <ul>
           <li>예고함 0</li>
           <li>미결함 0</li>
           <li>진행함 0</li>
@@ -280,13 +280,13 @@
         listEl.innerHTML = "";
         currentItems.forEach(item => {
           const tr = document.createElement("tr");
-          tr.innerHTML = `
+          tr.innerHTML = 
             <td><input type="checkbox" /></td>
             <td>${item.category}</td>
             <td>${item.template}</td>
             <td><a href="${item.filename}" target="_blank">${item.title}</a></td>
             <td>${item.datetime}</td>
-          `;
+          ;
           listEl.appendChild(tr);
         });
       }
@@ -318,7 +318,7 @@
         paginationEl.appendChild(makeButton("≫", totalPages));
       }
 
-      fetch("/drafts/voucher_list.json")
+      fetch("/testko.github.io/drafts/voucher_list.json")  // ✅ 절대경로로 수정
         .then(res => res.json())
         .then(data => {
           voucherData = data;
