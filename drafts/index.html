@@ -325,7 +325,7 @@ fetch("voucher_list.json")
     voucherData = data;
     renderTable(currentPage);
     renderPagination();
-    document.getElementById("draft-count").textContent = `(${voucherData.length})`;  // ✅ 카운트 표시
+    document.getElementById("draft-count").textContent = data.length;  // ✅ 카운트 표시
   });
   });
 </script>
