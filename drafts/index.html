@@ -288,25 +288,43 @@
     let currentPage = 1;
     let voucherData = [];
 
-    function renderTable(page = 1) {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const currentItems = voucherData.slice(start, end);
+function renderTable(page = 1) {
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const currentItems = voucherData.slice(start, end);
 
-      listEl.innerHTML = "";
-      currentItems.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><input type="checkbox" /></td>
-          <td>${item.category}</td>
-          <td>${item.template}</td>
-          <td><a href="#" onclick="return openPopup('${item.filename}')">${item.title}</a></td>
-          <td>${item.datetime}</td>
-        `;
-        listEl.appendChild(tr);
-      });
+  listEl.innerHTML = "";
+
+  // 전체 목록 기준으로 title 중복 수 세기
+  const titleCount = {};
+  voucherData.forEach(item => {
+    const key = item.title;
+    titleCount[key] = (titleCount[key] || 0) + 1;
+  });
+
+  // 각 title의 몇 번째 항목인지 카운트
+  const titleIndex = {};
+
+  currentItems.forEach(item => {
+    const key = item.title;
+    titleIndex[key] = (titleIndex[key] || 0) + 1;
+
+    let displayTitle = item.title;
+    if (titleCount[key] > 1) {
+      displayTitle += ` (${titleIndex[key]})`;
     }
 
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><input type="checkbox" /></td>
+      <td>${item.category}</td>
+      <td>${item.template}</td>
+      <td><a href="#" onclick="return openPopup('${item.filename}')">${displayTitle}</a></td>
+      <td>${item.datetime}</td>
+    `;
+    listEl.appendChild(tr);
+  });
+}
     function renderPagination() {
       const totalPages = Math.ceil(voucherData.length / itemsPerPage);
       paginationEl.innerHTML = "";
